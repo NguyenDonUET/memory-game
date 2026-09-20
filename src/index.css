@@ -30,12 +30,14 @@
   /* —— Spacing (Figma spacing-*) —— */
   --spacing-0: 0px;
   --spacing-100: 8px;
+  --spacing-150: 12px;
   --spacing-200: 16px;
   --spacing-300: 24px;
   --spacing-400: 32px;
   --spacing-500: 40px;
   --spacing-600: 48px;
   --spacing-700: 56px;
+  --spacing-800: 64px;
   --spacing-1000: 80px;
 
   /* —— Radius —— */
@@ -43,29 +45,37 @@
   --radius-20: 20px;
   --radius-full: 9999px;
 
+  /* —— Breakpoints —— */
+  --breakpoint-sm: 40rem; /* 640px */
+  --breakpoint-md: 48rem; /* 768px */
+  --breakpoint-lg: 69.375rem; /* 1110px */
+
   /* —— Layout widths —— */
   --max-width-modal: 40.875rem; /* 654px */
+  --max-width-board-sm: 20.4375rem; /* 327px */
+  --max-width-board-md: 33.25rem; /* 532px */
+  --max-width-board-lg: 69.375rem; /* 1110px */
 
-  /* —— Tile sizes (desktop) —— */
-  --spacing-tile-4: 7.375rem; /* 118px */
-  --spacing-tile-6: 5.125rem; /* 82px */
+  /* —— Tile sizes (fallback caps; grid uses fluid aspect-square) —— */
+  --spacing-tile-4: 7.375rem;
+  --spacing-tile-6: 5.125rem;
 
-  /* —— Typography presets (desktop band; refine if Figma type frame differs) —— */
-  --text-preset-1: 3rem; /* 48px */
+  /* —— Typography presets —— */
+  --text-preset-1: 3rem;
   --text-preset-1--line-height: 1.25;
-  --text-preset-2: 2rem; /* 32px */
+  --text-preset-2: 2rem;
   --text-preset-2--line-height: 1.25;
-  --text-preset-3: 1.5rem; /* 24px */
+  --text-preset-3: 1.5rem;
   --text-preset-3--line-height: 1.25;
-  --text-preset-4: 1.25rem; /* 20px */
+  --text-preset-4: 1.25rem;
   --text-preset-4--line-height: 1.25;
-  --text-preset-5: 1.125rem; /* 18px */
+  --text-preset-5: 1.125rem;
   --text-preset-5--line-height: 1.33;
 
-  /* —— Tile face type (numbers on circles) —— */
-  --text-tile-4: 3.5rem; /* 56px — 4×4 */
+  /* —— Tile face type (fluid) —— */
+  --text-tile-4: clamp(2rem, 14cqi, 3.5rem);
   --text-tile-4--line-height: 1;
-  --text-tile-6: 2.75rem; /* 44px — 6×6 */
+  --text-tile-6: clamp(1.25rem, 9cqi, 2.75rem);
   --text-tile-6--line-height: 1;
 
   /* —— shadcn semantic roles → Figma palette —— */

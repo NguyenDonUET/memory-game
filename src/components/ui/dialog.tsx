@@ -31,7 +31,7 @@ export const DialogContent = forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'max-w-modal rounded-20 fixed top-1/2 left-1/2 z-50 w-full -translate-x-1/2 -translate-y-1/2 bg-white p-600 shadow-lg focus:outline-none',
+        'max-w-modal rounded-20 fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 bg-white p-300 shadow-lg focus:outline-none sm:w-full sm:p-600',
         className,
       )}
       {...props}
@@ -54,7 +54,7 @@ export function DialogTitle({
 }: ComponentPropsWithoutRef<typeof DialogPrimitive.Title>) {
   return (
     <DialogPrimitive.Title
-      className={cn('text-preset-1 font-bold text-blue-950', className)}
+      className={cn('text-preset-3 sm:text-preset-1 font-bold text-blue-950', className)}
       {...props}
     />
   );

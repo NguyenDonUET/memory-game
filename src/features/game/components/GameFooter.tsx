@@ -8,7 +8,7 @@ interface SoloStatsProps {
 
 export function SoloStats({ elapsedMs, moves }: SoloStatsProps) {
   return (
-    <div className="mx-auto flex w-full max-w-[540px] gap-200">
+    <div className="mx-auto flex w-full gap-150 sm:gap-200">
       <StatPill label="Time" value={formatElapsed(elapsedMs)} />
       <StatPill label="Moves" value={String(moves)} />
     </div>
@@ -22,9 +22,9 @@ interface StatPillProps {
 
 function StatPill({ label, value }: StatPillProps) {
   return (
-    <div className="rounded-10 flex flex-1 items-center justify-between bg-blue-100 px-300 py-300">
+    <div className="rounded-10 flex flex-1 flex-col items-center gap-100 bg-blue-100 px-200 py-200 sm:flex-row sm:justify-between sm:px-300 sm:py-300">
       <span className="text-preset-5 font-bold text-blue-800">{label}</span>
-      <span className="text-preset-2 font-bold text-blue-950">{value}</span>
+      <span className="text-preset-3 sm:text-preset-2 font-bold text-blue-950">{value}</span>
     </div>
   );
 }
@@ -39,10 +39,10 @@ export function PlayerScoreboard({ playerCount, scores, currentPlayer }: PlayerS
   return (
     <div
       className={cn(
-        'mx-auto grid w-full gap-200',
-        playerCount === 2 && 'max-w-[540px] grid-cols-2',
-        playerCount === 3 && 'max-w-[720px] grid-cols-3',
-        playerCount === 4 && 'max-w-[1110px] grid-cols-4',
+        'mx-auto grid w-full gap-150 sm:gap-200',
+        playerCount === 2 && 'grid-cols-2',
+        playerCount === 3 && 'grid-cols-3',
+        playerCount === 4 && 'grid-cols-2 sm:grid-cols-4',
       )}
     >
       {Array.from({ length: playerCount }, (_, index) => {
@@ -62,7 +62,7 @@ export function PlayerScoreboard({ playerCount, scores, currentPlayer }: PlayerS
             ) : null}
             <div
               className={cn(
-                'rounded-10 flex w-full items-center justify-between px-300 py-300',
+                'rounded-10 flex w-full flex-col items-center gap-100 px-150 py-150 sm:flex-row sm:justify-between sm:px-300 sm:py-300',
                 isActive ? 'bg-orange-400 text-blue-950' : 'bg-blue-100 text-blue-950',
               )}
             >
@@ -72,9 +72,12 @@ export function PlayerScoreboard({ playerCount, scores, currentPlayer }: PlayerS
                   isActive ? 'text-blue-950' : 'text-blue-800',
                 )}
               >
-                Player {index + 1}
+                <span className="sm:hidden">P{index + 1}</span>
+                <span className="hidden sm:inline">Player {index + 1}</span>
               </span>
-              <span className="text-preset-2 font-bold text-blue-950">{scores[index] ?? 0}</span>
+              <span className="text-preset-3 sm:text-preset-2 font-bold text-blue-950">
+                {scores[index] ?? 0}
+              </span>
             </div>
             {isActive ? (
               <p className="text-preset-5 mt-100 font-bold tracking-[0.05em] text-blue-950 uppercase">

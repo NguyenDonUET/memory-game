@@ -56,11 +56,23 @@ function SoloResults({ state, onRestart, onNewGame }: ResultsProps) {
         <ResultRow label="Time Elapsed" value={formatElapsed(state.elapsedMs)} />
         <ResultRow label="Moves Taken" value={`${state.moves} Moves`} />
       </div>
-      <div className="flex w-full gap-200">
-        <Button type="button" variant="primary" size="lg" className="flex-1" onClick={onRestart}>
+      <div className="flex w-full flex-col gap-200 sm:flex-row">
+        <Button
+          type="button"
+          variant="primary"
+          size="lg"
+          className="w-full flex-1"
+          onClick={onRestart}
+        >
           Restart
         </Button>
-        <Button type="button" variant="secondary" size="lg" className="flex-1" onClick={onNewGame}>
+        <Button
+          type="button"
+          variant="secondary"
+          size="lg"
+          className="w-full flex-1"
+          onClick={onNewGame}
+        >
           Setup New Game
         </Button>
       </div>
@@ -120,7 +132,7 @@ function ResultRow({ label, value }: ResultRowProps) {
   return (
     <div className="rounded-10 flex items-center justify-between bg-blue-100 px-300 py-300">
       <span className="text-preset-5 font-bold text-blue-800">{label}</span>
-      <span className="text-preset-2 font-bold text-blue-950">{value}</span>
+      <span className="text-preset-4 sm:text-preset-2 font-bold text-blue-950">{value}</span>
     </div>
   );
 }

@@ -24,11 +24,11 @@ function OptionGroup<T extends string | number>({
   const labelId = `setup-${legend.toLowerCase().replace(/\s+/g, '-')}`;
 
   return (
-    <div className="flex flex-col gap-200" role="group" aria-labelledby={labelId}>
+    <div className="flex flex-col gap-150 sm:gap-200" role="group" aria-labelledby={labelId}>
       <p id={labelId} className="text-preset-5 font-bold text-blue-800">
         {legend}
       </p>
-      <div className="flex gap-200">
+      <div className="flex gap-100 sm:gap-200">
         {options.map((option) => {
           const selected = option.value === value;
           return (
@@ -39,6 +39,7 @@ function OptionGroup<T extends string | number>({
               variant={selected ? 'selected' : 'soft'}
               aria-pressed={selected}
               onClick={() => onChange(option.value)}
+              className="text-preset-5 h-500 sm:h-600"
             >
               {option.label}
             </Button>
@@ -51,10 +52,12 @@ function OptionGroup<T extends string | number>({
 
 export function SetupScreen({ settings, onChange, onStart }: SetupScreenProps) {
   return (
-    <div className="flex min-h-dvh flex-col items-center justify-center bg-blue-950 px-400 py-600">
-      <h1 className="text-preset-1 mb-600 font-bold text-white">memory</h1>
+    <div className="flex min-h-dvh flex-col items-center justify-center bg-blue-950 px-300 py-500 sm:px-400 sm:py-600">
+      <h1 className="text-preset-2 sm:text-preset-1 mb-500 font-bold text-white sm:mb-600">
+        memory
+      </h1>
       <form
-        className="max-w-modal rounded-20 flex w-full flex-col gap-500 bg-white p-600"
+        className="max-w-modal rounded-20 flex w-full flex-col gap-400 bg-white p-300 sm:gap-500 sm:p-600"
         onSubmit={(event) => {
           event.preventDefault();
           onStart();
@@ -89,7 +92,7 @@ export function SetupScreen({ settings, onChange, onStart }: SetupScreenProps) {
             { value: 6, label: '6x6' },
           ]}
         />
-        <Button type="submit" variant="primary" size="lg" className="mt-100 w-full">
+        <Button type="submit" variant="primary" size="lg" className="mt-100 h-500 w-full sm:h-600">
           Start Game
         </Button>
       </form>

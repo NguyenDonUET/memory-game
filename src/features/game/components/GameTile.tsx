@@ -8,18 +8,10 @@ interface GameTileProps {
   theme: Theme;
   disabled: boolean;
   onFlip: (tileId: number) => void;
-  sizeClassName: string;
   faceClassName: string;
 }
 
-export function GameTile({
-  tile,
-  theme,
-  disabled,
-  onFlip,
-  sizeClassName,
-  faceClassName,
-}: GameTileProps) {
+export function GameTile({ tile, theme, disabled, onFlip, faceClassName }: GameTileProps) {
   const isRevealed = tile.state === 'flipped' || tile.state === 'matched';
   const label =
     tile.state === 'hidden'
@@ -36,8 +28,7 @@ export function GameTile({
       aria-pressed={isRevealed}
       onClick={() => onFlip(tile.id)}
       className={cn(
-        'flex items-center justify-center rounded-full font-bold transition-colors duration-200',
-        sizeClassName,
+        '@container flex aspect-square w-full min-w-0 items-center justify-center rounded-full font-bold transition-colors duration-200',
         tile.state === 'hidden' && 'hover:bg-blue-350 focus-visible:bg-blue-350 bg-blue-800',
         tile.state === 'flipped' && 'bg-orange-400 text-blue-950',
         tile.state === 'matched' && 'bg-blue-300 text-blue-950',
@@ -48,7 +39,7 @@ export function GameTile({
         theme === 'numbers' ? (
           <span className={cn('leading-none font-bold', faceClassName)}>{tile.value + 1}</span>
         ) : (
-          <TileIcon value={tile.value} className="size-3/5 text-current" />
+          <TileIcon value={tile.value} className="size-3/5 max-h-16 max-w-16 text-current" />
         )
       ) : null}
     </button>
