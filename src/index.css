@@ -1,0 +1,111 @@
+@import 'tailwindcss';
+
+@source not '../.cursor';
+@source not '../.agents';
+@source not '../dist';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* —— Font —— */
+  --font-sans: 'Atkinson Hyperlegible', ui-sans-serif, system-ui, sans-serif;
+
+  /* —— Colour palette (Figma) —— */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-grey-50: #fcfcfc;
+  --color-grey-100: #f2f2f2;
+
+  --color-blue-100: #dfe7ec;
+  --color-blue-300: #bcced9;
+  --color-blue-350: #6395b8;
+  --color-blue-400: #7191a5;
+  --color-blue-800: #304859;
+  --color-blue-950: #152938;
+
+  --color-orange-300: #ffb84a;
+  --color-orange-400: #fda214;
+
+  /* —— Spacing (Figma spacing-*) —— */
+  --spacing-0: 0px;
+  --spacing-100: 8px;
+  --spacing-200: 16px;
+  --spacing-300: 24px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+  --spacing-600: 48px;
+  --spacing-1000: 80px;
+
+  /* —— Radius —— */
+  --radius-10: 10px;
+  --radius-full: 9999px;
+
+  /* —— Typography presets (desktop band; refine if Figma type frame differs) —— */
+  --text-preset-1: 3rem; /* 48px */
+  --text-preset-1--line-height: 1.25;
+  --text-preset-2: 2rem; /* 32px */
+  --text-preset-2--line-height: 1.25;
+  --text-preset-3: 1.5rem; /* 24px */
+  --text-preset-3--line-height: 1.25;
+  --text-preset-4: 1.25rem; /* 20px */
+  --text-preset-4--line-height: 1.25;
+  --text-preset-5: 1.125rem; /* 18px */
+  --text-preset-5--line-height: 1.33;
+
+  /* —— shadcn semantic roles → Figma palette —— */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --background: #fcfcfc;
+  --foreground: #152938;
+  --card: #ffffff;
+  --card-foreground: #152938;
+  --popover: #ffffff;
+  --popover-foreground: #152938;
+  --primary: #fda214;
+  --primary-foreground: #ffffff;
+  --secondary: #dfe7ec;
+  --secondary-foreground: #152938;
+  --muted: #f2f2f2;
+  --muted-foreground: #7191a5;
+  --accent: #bcced9;
+  --accent-foreground: #152938;
+  --destructive: #dc2626;
+  --border: #bcced9;
+  --input: #bcced9;
+  --ring: #fda214;
+  --radius: 10px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply font-sans antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground min-h-dvh;
+  }
+}
