@@ -1,0 +1,103 @@
+---
+description: ESLint + Prettier conventions and required config
+alwaysApply: true
+---
+
+# Linting & formatting
+
+- ESLint (flat config, `eslint.config.js`) is the source of truth for code-quality rules; Prettier only handles formatting. Never let ESLint rules and Prettier fight over formatting — `eslint-config-prettier` disables all stylistic ESLint rules that would conflict.
+- Run `eslint --fix` and `prettier --write` before considering any task done. Do not leave lint errors or warnings unresolved — fix them, don't disable the rule, unless there's a documented reason (inline `// eslint-disable-next-line <rule> -- reason`).
+- Tailwind classes must stay sorted by `prettier-plugin-tailwindcss` — never manually reorder classes to "look right"; trust the plugin's canonical order.
+
+## Required dependencies
+
+```
+eslint
+typescript-eslint
+eslint-plugin-react
+eslint-plugin-react-hooks
+eslint-plugin-jsx-a11y
+eslint-config-prettier
+prettier
+prettier-plugin-tailwindcss
+```
+
+## `eslint.config.js` (flat config, ESLint 9+)
+
+```js
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import prettierConfig from 'eslint-config-prettier';
+
+export default tseslint.config(
+  { ignores: ['dist', 'build', 'node_modules'] },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    files: ['**/*.{ts,tsx}'],
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      'jsx-a11y': jsxA11y,
+    },
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+      },
+    },
+    settings: {
+      react: { version: 'detect' },
+    },
+    rules: {
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      ...jsxA11y.configs.recommended.rules,
+
+      'react/react-in-jsx-scope': 'off', // not needed with the new JSX transform
+      'react/prop-types': 'off', // TypeScript handles this
+
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/consistent-type-imports': 'warn',
+
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+    },
+  },
+  prettierConfig,
+);
+```
+
+## `.prettierrc`
+
+```json
+{
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 100,
+  "tabWidth": 2,
+  "plugins": ["prettier-plugin-tailwindcss"]
+}
+```
+
+## `.prettierignore`
+
+```
+dist
+build
+node_modules
+pnpm-lock.yaml
+```
+
+## Notes for Cursor
+
+- When generating or editing code, always follow the rules above rather than default formatting — e.g. single quotes, trailing commas, no semicolon omission.
+- Do not introduce unused variables/imports; if a variable is intentionally unused, prefix it with `_`.
+- Prefer `import type { X } from '...'` for type-only imports (enforced by `consistent-type-imports`).

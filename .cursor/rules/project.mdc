@@ -1,0 +1,49 @@
+---
+description: Core project conventions — always applied
+alwaysApply: true
+---
+
+# Stack
+
+- React 18 + TypeScript (strict mode). Never use `any`; if the type is unclear, use `unknown` and narrow it.
+- UI components: shadcn/ui (already generated in `src/components/ui/`).
+- Styling: Tailwind CSS only. Do not write CSS modules / styled-components / inline style objects unless it's truly not possible with Tailwind (e.g. a complex custom keyframe animation).
+- Package manager: pnpm
+
+# Folder structure
+
+```
+src/
+  components/
+    ui/            # shadcn generated — DO NOT hand-edit directly, only via CLI or an intentional override
+  hooks/           # custom React hooks
+  lib/             # pure utils, no React
+```
+
+- App UI lives in `src/components/` (one component per file). Keep shadcn primitives in `components/ui/`.
+- Shared hooks go in `src/hooks/`; helpers with no React go in `src/lib/`.
+
+# Layout
+
+- Focus on **desktop styles only**. Ignore mobile layouts, mobile breakpoints, and mobile-first media queries for now.
+- Match the desktop Figma / style guide. Do not add `sm:` / `md:` / `lg:` responsive variants unless asked.
+
+# Coding conventions
+
+- Components: PascalCase, one component per file, named export (not `export default`) for easier find/rename during refactors.
+- Hooks: camelCase, prefixed with `use`.
+- Props: define `interface XxxProps` directly above the component. Only extract a separate `types.ts` when the type is reused elsewhere.
+- Always use `forwardRef` for components that may receive a ref (custom input, button, etc.), following the shadcn pattern.
+- Never introduce a new dependency that isn't already in `package.json` — ask before proposing to add a package.
+- Every interactive element must have proper `aria-*` attributes and be usable via keyboard (Tab/Enter/Escape).
+
+# Import order
+
+1. React / external libraries
+2. Internal absolute imports (`@/components`, `@/hooks`, `@/lib`)
+3. Relative imports (`./`, `../`)
+4. Type-only imports (as a separate, final import group)
+
+# When unsure
+
+If a spec or design detail is ambiguous (spacing, behavior, edge case), ask instead of guessing and implementing.

@@ -1,0 +1,31 @@
+---
+description: Tailwind + shadcn styling conventions
+globs: ["**/*.tsx", "**/*.css"]
+alwaysApply: false
+---
+
+# Tailwind
+
+- This project is **Tailwind v4 CSS-first**. All design tokens live in `src/index.css` (`@theme` + `:root` / `.dark`). There is no `tailwind.config.*`.
+- Always prefer tokens over arbitrary values (`mt-[13px]`, `text-[#111827]`).
+  - **Figma primitives** (palette, spacing-*, radius-*, text-preset-*, breakpoints) → `@theme` in `src/index.css`.
+  - **shadcn semantic roles** (`background`, `primary`, `destructive`…) → `:root` / `.dark`, wired into `@theme` as `--color-*`.
+  If a needed token doesn't exist yet, add it to `src/index.css` first — don't hardcode inline values.
+  Examples: `gap-200` (16px), `rounded-10`, `text-preset-3 font-semibold`, `bg-teal-700`, `text-neutral-500`.
+- Use `cn()` from `@/lib/utils` to merge conditional className strings — never concatenate className manually. (`utils.ts` re-exports the `cn` package, shadcn's current clsx + tailwind-merge replacement.)
+- Recommended class order: layout (flex/grid) → sizing → spacing → typography → color → border/shadow → state (`hover:`, `focus:`, `disabled:`).
+- Desktop styles only for now. Do not add mobile layouts or `sm:` / `md:` / `lg:` / `xl:` breakpoint variants unless asked.
+
+# shadcn/ui
+
+- Never hand-edit files in `components/ui/` to patch a single usage — instead:
+  - If a new variant is needed → add it to that component's `cva()` config.
+  - If it's a one-off tweak → override via a `className` prop passed in from outside, leveraging the `cn()` already built into the component.
+- To add a new shadcn component, use the CLI (`npx shadcn@latest add <component>`) rather than hand-writing it from scratch.
+- Preserve the existing `cva` structure (variants/defaultVariants) when extending a component — don't reorganize it differently.
+
+# Design tokens from Figma
+
+- Before styling any component, check `src/index.css` for the matching token. If a Figma value isn't there yet, add it — don't silently hardcode a one-off value.
+- Spacing utilities use Figma names (`p-100` = 8px, not Tailwind's default scale).
+- Pair text presets with weight: `text-preset-1 font-bold`, `text-preset-3-semibold font-semibold`, `text-preset-5 font-normal`.
