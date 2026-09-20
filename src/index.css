@@ -35,11 +35,20 @@
   --spacing-400: 32px;
   --spacing-500: 40px;
   --spacing-600: 48px;
+  --spacing-700: 56px;
   --spacing-1000: 80px;
 
   /* —— Radius —— */
   --radius-10: 10px;
+  --radius-20: 20px;
   --radius-full: 9999px;
+
+  /* —— Layout widths —— */
+  --max-width-modal: 40.875rem; /* 654px */
+
+  /* —— Tile sizes (desktop) —— */
+  --spacing-tile-4: 7.375rem; /* 118px */
+  --spacing-tile-6: 5.125rem; /* 82px */
 
   /* —— Typography presets (desktop band; refine if Figma type frame differs) —— */
   --text-preset-1: 3rem; /* 48px */
@@ -52,6 +61,12 @@
   --text-preset-4--line-height: 1.25;
   --text-preset-5: 1.125rem; /* 18px */
   --text-preset-5--line-height: 1.33;
+
+  /* —— Tile face type (numbers on circles) —— */
+  --text-tile-4: 3.5rem; /* 56px — 4×4 */
+  --text-tile-4--line-height: 1;
+  --text-tile-6: 2.75rem; /* 44px — 6×6 */
+  --text-tile-6--line-height: 1;
 
   /* —— shadcn semantic roles → Figma palette —— */
   --color-background: var(--background);
@@ -82,7 +97,7 @@
   --popover: #ffffff;
   --popover-foreground: #152938;
   --primary: #fda214;
-  --primary-foreground: #ffffff;
+  --primary-foreground: #152938;
   --secondary: #dfe7ec;
   --secondary-foreground: #152938;
   --muted: #f2f2f2;
